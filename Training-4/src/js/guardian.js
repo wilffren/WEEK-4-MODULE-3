@@ -1,8 +1,8 @@
-function checkSession(){
-    let checkUser = localStorage.getItem('user');
+function checkSession() {
+    let checkUser = localStorage.getItem('currentUser');
 
     if (checkUser === null){
-        window.location.href = 'login.html';
+        window.location.href = 'index.html';
     }
 }
 
