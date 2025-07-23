@@ -1,11 +1,15 @@
 {
-    "user":[
-        {
-            "id": "j01f",
-            "username": "admin",
-            "password": "admin123"
-        }
-    ],
-
-    "categories":[]
+  "user": [
+    {
+      "id": "j01f",
+      "username": "admin",
+      "password": "admin123"
+    }
+  ],
+  "categories": [
+    {
+      "id": "fa67",
+      "name": "Food"
+    }
+  ]
 }
