@@ -3,12 +3,14 @@
 const loginForm = document.getElementById('loginForm');
 
 loginForm.addEventListener('submit',  (event) => {
-  event.preventDefault(); // Prevent the default form submission
-
+  
   const inputUsername = loginForm.username.value
   const inputPassword = loginForm.password.value;
 
   login(inputUsername, inputPassword)
+
+  event.preventDefault(); // Prevent the default form submission
+
 })
 
 async function login(inputUsername, inputPassword) {
