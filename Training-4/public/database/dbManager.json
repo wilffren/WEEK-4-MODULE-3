@@ -32,5 +32,14 @@
       "name": "Phones"
     }
   ],
-  "movements": []
+  "movements": [
+    {
+      "id": "10f1",
+      "type": "sale",
+      "description": "trial",
+      "amount": "50000",
+      "date": "2025-07-23",
+      "categoryId": "253b"
+    }
+  ]
 }

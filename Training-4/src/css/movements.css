@@ -141,6 +141,7 @@ select:focus {
 
 /* Save Button */
 .btn-save {
+    margin-top: 10px;
     width: 100%;
     padding: 12px;
     background: linear-gradient(135deg, #10b981 0%, #059669 100%);
