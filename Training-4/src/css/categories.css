@@ -215,7 +215,8 @@ main > h3 {
     animation: slideInScale 0.7s ease;
 }
 
-#listCategories li {
+/* Category Item Styles */
+.category-item {
     background: rgba(79, 70, 229, 0.1);
     margin: 10px 0;
     padding: 15px 20px;
@@ -225,10 +226,65 @@ main > h3 {
     transition: all 0.3s ease;
 }
 
-#listCategories li:hover {
+.category-item:hover {
     transform: translateX(5px);
     background: rgba(79, 70, 229, 0.15);
     box-shadow: 0 3px 10px rgba(79, 70, 229, 0.2);
+}
+
+.category-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.category-name {
+    flex: 1;
+    font-size: 16px;
+    color: #333;
+}
+
+.category-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-btn {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+}
+
+.edit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+    background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+}
+
+.delete-btn {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+.delete-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
 }
 
 /* Footer Styles */
@@ -288,7 +344,7 @@ footer em {
     
     #form-categories {
         padding: 30px 20px;
-        margin: 20px;
+        margin-bottom: 20px;
     }
     
     #form-categories h3 {
@@ -297,7 +353,22 @@ footer em {
     
     main > h3 {
         font-size: 2rem;
-        padding: 30px 20px;
-        margin: 20px;
+        padding: 20px;
+        margin-bottom: 15px;
+    }
+    
+    #listCategories {
+        padding: 20px;
+    }
+    
+    .category-buttons {
+        flex-direction: column;
+        gap: 5px;
+        width: 100px;
+    }
+    
+    .edit-btn, .delete-btn {
+        font-size: 11px;
+        padding: 6px 12px;
     }
 }
