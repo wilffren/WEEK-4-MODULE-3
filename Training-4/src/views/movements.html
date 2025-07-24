@@ -17,40 +17,36 @@
         </header>
         <main>
             <section>
-                <form id="form-movimiento">
+                <form id="form-movements">
                     <label for="type">Types</label>
                     <select name="type" id="type">
                         <option value>Select Option</option>
                         <option value="buy">Buy</option>
                         <option value="sale">Sale</option>
                     </select>
+
+                    <label for="description">Description</label>
+                    <input type="text" id="description" name="description"
+                        required />
+
+                    <label for="amount">Amount ($)</label>
+                    <input type="number" id="amount" name="amount" min="1"
+                        required />
+
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date" required />
+
+                    <label for="category">Category</label>
+                    <select id="category" name="category" required>
+                        <option value>-- Select --</option>
+
+                    </select>
+
+                    <button type="submit" class="btn-save">Save
+                        Movement</button>
                 </form>
             </section>
-            <section>
-                <label for="description">Description</label>
-                <input type="text" id="description" name="description"
-                    required />
-            </section>
-            <section>
-                <label for="amount">Amount ($)</label>
-                <input type="number" id="amount" name="amount" min="1"
-                    required />
-            </section>
-            <section>
-                <label for="date">Date</label>
-                <input type="date" id="date" name="date" required />
-            </section>
-            <section>
-                <label for="category">Category</label>
-                <select id="category" name="category" required>
-                    <option value>-- Select --</option>
 
-                </select>
-
-            </section>
-            <section>
-                <button type="submit" class="btn-save">Save Movement</button>
-            </section>
             <section class="filters">
                 <select id="filter-type">
                     <option value>Type</option>
