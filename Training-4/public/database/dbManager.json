@@ -1,9 +1,35 @@
 {
-    "user":[
-        {
-            "id": "j01f",
-            "username": "admin",
-            "password": "admin123"
-        }
-    ]
+  "user": [
+    {
+      "id": "j01f",
+      "username": "admin",
+      "password": "admin123"
+    }
+  ],
+  "categories": [
+    {
+      "id": "fa67",
+      "name": "Food"
+    },
+    {
+      "id": "542b",
+      "name": "Fast food"
+    },
+    {
+      "id": "03c3",
+      "name": "Motors"
+    },
+    {
+      "name": "PC",
+      "id": "253b"
+    },
+    {
+      "id": "cb21",
+      "name": "Books"
+    },
+    {
+      "id": "8757",
+      "name": "Flys"
+    }
+  ]
 }

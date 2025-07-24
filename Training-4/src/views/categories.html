@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../css/categories.css">
+        <script type="module" src="../js/guardian.js"></script>
+        <title>DashBoard</title>
+    </head>
+    <body>
+        <header>
+            <h1>Welcome to the Store</h1>
+            <h2>Panel Control</h2>
+            <nav>
+                <button type="submit" id="btn-logout">Log Out</button>
+                <button type="submit" id="return">Return Dashborad</button>
+            </nav>
+        </header>
+        <main>
+            <form id="form-categories">
+                <h3>Add categories</h3>
+                <input type="text" name="categorie" id="categorie" placeholder="Category Name" required>
+                <button type="submit" id="btn-categorie">Add categorie</button>
+            </form>
+
+            <h3>List of Categories</h3>
+            <button id="get-category">Get Categories</button>
+             <ul id="listCategories"></ul>
+        </main>
+        <footer>
+            <p>&copy; 2025 <em>Wilffren Muñoz</em></p>
+            <p>All rights reserved.</p>
+        </footer>
+        <script type="module" src="../js/categories.js"></script>
+    </body>
+</html>
