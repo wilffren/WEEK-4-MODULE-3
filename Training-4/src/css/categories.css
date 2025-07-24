@@ -95,11 +95,10 @@ nav #return:hover {
 /* Main Content Styles */
 main {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
     padding: 40px 20px;
+    width: 100%;
 }
 
 /* Form Styles */
@@ -110,7 +109,6 @@ main {
     border-radius: 20px;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
     text-align: center;
-    max-width: 600px;
     width: 100%;
     animation: slideInScale 0.7s ease;
     margin-bottom: 40px;
@@ -177,12 +175,60 @@ main > h3 {
     text-align: center;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(15px);
-    padding: 50px;
+    padding: 30px;
     border-radius: 20px;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-    max-width: 600px;
     width: 100%;
     animation: slideInScale 0.7s ease;
+    margin-bottom: 20px;
+}
+
+/* Get Categories Button */
+#get-category {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 30px;
+}
+
+#get-category:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+}
+
+/* Categories List Container */
+#listCategories {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    list-style: none;
+    animation: slideInScale 0.7s ease;
+}
+
+#listCategories li {
+    background: rgba(79, 70, 229, 0.1);
+    margin: 10px 0;
+    padding: 15px 20px;
+    border-radius: 10px;
+    border-left: 4px solid #4f46e5;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+#listCategories li:hover {
+    transform: translateX(5px);
+    background: rgba(79, 70, 229, 0.15);
+    box-shadow: 0 3px 10px rgba(79, 70, 229, 0.2);
 }
 
 /* Footer Styles */
