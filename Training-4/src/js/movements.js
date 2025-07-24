@@ -80,13 +80,15 @@ async function showMovements() {
                 <td>${movement.date}</td>
                 <td>${movement.category.name}</td>
                 <td>
-              <button class="btn-editar" data-id="${movement.id}">Edit</button>
-              <button class="btn-eliminar" data-id="${movement.id}">Delete</button>
+              <button class="btn-edit" data-id="${movement.id}">Edit</button>
+              <button class="btn-delete" data-id="${movement.id}">Delete</button>
             </td>
             </tr>
         `
     }
 }
+
+
 
 //create a new movement
 async function createNewMovement(newMovement) {

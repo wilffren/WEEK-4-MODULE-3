@@ -34,10 +34,10 @@
   ],
   "movements": [
     {
-      "id": "10f1",
+      "id": "3919",
       "type": "sale",
       "description": "trial",
-      "amount": "50000",
+      "amount": "25500",
       "date": "2025-07-23",
       "categoryId": "253b"
     }
