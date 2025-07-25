@@ -12,12 +12,8 @@
       "name": "Food"
     },
     {
-      "id": "542b",
-      "name": "Fast food"
-    },
-    {
-      "id": "03c3",
-      "name": "Motors"
+      "name": "Cars",
+      "id": "03c3"
     },
     {
       "id": "253b",
@@ -34,12 +30,45 @@
   ],
   "movements": [
     {
+      "id": "4832",
+      "type": "sale",
+      "description": "Sell my iphone",
+      "amount": "500000",
+      "date": "2025-07-24",
+      "categoryId": "1d34"
+    },
+    {
+      "id": "b32e",
       "type": "buy",
-      "description": "my iphone 16 pro max",
-      "amount": "9000000",
-      "date": "2025-07-23",
-      "categoryId": "1d34",
-      "id": "c0ff"
+      "description": "Market for month",
+      "amount": "100000",
+      "date": "2025-07-15",
+      "categoryId": "fa67"
+    },
+    {
+      "id": "c1df",
+      "type": "sale",
+      "description": "Sale my  red car",
+      "amount": "4500000",
+      "date": "2025-07-24",
+      "categoryId": "03c3"
+    },
+    {
+      "id": "56fa",
+      "type": "sale",
+      "description": "Sell my samsung galaxy z fold",
+      "amount": "60000000",
+      "date": "2025-07-15",
+      "categoryId": "1d34"
+    },
+    {
+      "id": "f8e0",
+      "type": "buy",
+      "description": "Buy my favorite book",
+      "amount": "5000",
+      "date": "2025-07-17",
+      "categoryId": "cb21"
     }
-  ]
+  ],
+  "reports": []
 }
