@@ -34,12 +34,12 @@
   ],
   "movements": [
     {
-      "id": "3919",
-      "type": "sale",
-      "description": "trial",
-      "amount": "25500",
+      "type": "buy",
+      "description": "my iphone 16 pro max",
+      "amount": "9000000",
       "date": "2025-07-23",
-      "categoryId": "253b"
+      "categoryId": "1d34",
+      "id": "c0ff"
     }
   ]
 }
