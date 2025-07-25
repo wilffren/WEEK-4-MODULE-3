@@ -97,7 +97,7 @@ This web application, developed with HTML, CSS, and JavaScript, provides a compr
 ## **Author**
 
 **Wilffren Efrain Muñoz Velasquez**  
-Coder by Clan Ciénaga
+Coder by Clan Malecon
 
 ---
 
