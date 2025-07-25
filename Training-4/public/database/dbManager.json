@@ -12,12 +12,8 @@
       "name": "Food"
     },
     {
-      "id": "542b",
-      "name": "Fast food"
-    },
-    {
-      "id": "03c3",
-      "name": "Motors"
+      "name": "Cars",
+      "id": "03c3"
     },
     {
       "id": "253b",

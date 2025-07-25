@@ -1,3 +1,5 @@
+import { deleteCategory, saveCategorie, updateCategory, } from "../services/categoriesService";
+
 //Return to Dashboard
 document.getElementById("return").addEventListener("click", () => {
     window.location.href = "dashboard.html";
@@ -28,32 +30,9 @@ btnCategorie.addEventListener("click", (event) => {
     saveCategorie(newCategory);
 });
 
-// saved categories function
-async function saveCategorie(newCategory) {
-    try {
-        let response = await fetch(endPoint, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(newCategory)
-        });
-
-        if(response.ok){
-            alert("Category created successfully!");
-            inputText.value = ""; 
-           
-        } else {
-            alert("Error creating category");
-        }
-    } catch (error) {
-        console.error('Error saving category:', error);
-        alert("Error saving category");
-    }
-}
 
 //load the categories when the page loads
-async function loadCategories() {
+export async function loadCategories() {
     try {
         const response = await fetch(endPoint);
         const data = await response.json();
@@ -126,51 +105,6 @@ document.addEventListener("DOMContentLoaded", () => {
     loadCategories(); // load categories when the page is ready
 });
 
-// Update category function
-async function updateCategory(categoryId, newName) {
-    try {
-        let response = await fetch(`${endPoint}/${categoryId}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ name: newName })
-        });
-
-        if(response.ok){
-            alert("Category updated successfully!");
-            loadCategories(); // Reload the list
-        } else {
-            alert("Error updating category");
-        }
-    } catch (error) {
-        console.error('Error updating category:', error);
-        alert("Error updating category");
-    }
-}
-
-// Delete category function
-async function deleteCategory(categoryId, categoryName) {
-    const confirmDelete = confirm(`Are you sure you want to delete "${categoryName}"?`);
-    
-    if (!confirmDelete) return;
-
-    try {
-        let response = await fetch(`${endPoint}/${categoryId}`, {
-            method: "DELETE"
-        });
-
-        if(response.ok){
-            alert("Category deleted successfully!");
-            loadCategories(); // Reload the list
-        } else {
-            alert("Error deleting category");
-        }
-    } catch (error) {
-        console.error('Error deleting category:', error);
-        alert("Error deleting category");
-    }
-}
 
 // Function to edit category (prompts for new name)
 function editCategory(categoryId, currentName) {
