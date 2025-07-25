@@ -1,3 +1,5 @@
+import { createNewMovement, deleteMovement, getMovement, getMovements, updateMovement } from "../services/movementsService";
+
 //Return to Dashboard
 document.getElementById("return").addEventListener("click", () => {
     window.location.href = "dashboard.html";
@@ -18,10 +20,10 @@ let editingMovementId = null; // Variable para saber si estamos editando
 document.addEventListener("DOMContentLoaded", function () {
     showCategories();
     showMovements();
-})                                    
-    
+})
+
 //For boton to create a new movement or edit existing
-$formMovements.addEventListener("submit", function (event)  {
+$formMovements.addEventListener("submit", async function (event) {
     event.preventDefault();
 
     const movementData = {
@@ -35,40 +37,32 @@ $formMovements.addEventListener("submit", function (event)  {
     if (editingMovementId) {
         updateMovement(editingMovementId, movementData);
     } else {
-        createNewMovement(movementData);
+        let response = await createNewMovement(movementData);
+        if (response) {
+            alert("Movement created successfully")
+            showMovements();
+        } else {
+            console.error("Error creating movement")
+        }
     }
-    
+
     $formMovements.reset();
     editingMovementId = null;
     document.querySelector('button[type="submit"]').textContent = "Create Movement";
 });
 
 // Event delegation para botones de editar y eliminar
-$movementsBody.addEventListener("click", function(event) {
+$movementsBody.addEventListener("click", function (event) {
     if (event.target.classList.contains("edit-btn")) {
         const movementId = event.target.dataset.id;
         editMovement(movementId);
     }
-    
+
     if (event.target.classList.contains("delete-btn")) {
         const movementId = event.target.dataset.id;
         deleteMovement(movementId);
     }
 });
-
-//get the movements
-async function getMovements() {
-    let response = await fetch(`${endPointMovements}?_embed=category`)
-    let data = await response.json();
-    return data;
-}
-
-//get single movement
-async function getMovement(id) {
-    let response = await fetch(`${endPointMovements}/${id}?_embed=category`)
-    let data = await response.json();
-    return data;
-}
 
 //show categories
 async function showCategories() {
@@ -77,11 +71,11 @@ async function showCategories() {
     let data = await response.json()
 
     if (data.length > 0) {
-       selectCategories.innerHTML += `
+        selectCategories.innerHTML += `
             <option disabled>-- Select --</option>
         `
     }
-       
+
     data.forEach(category => {
         selectCategories.innerHTML += `
             <option value="${category.id}">${category.name}</option>
@@ -90,7 +84,7 @@ async function showCategories() {
 }
 
 //show movements
-async function showMovements() {
+export async function showMovements() {
     let movements = await getMovements()
 
     $movementsBody.innerHTML = ""
@@ -112,70 +106,20 @@ async function showMovements() {
     }
 }
 
-//create a new movement
-async function createNewMovement(newMovement) {
-    let response = await fetch(endPointMovements, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(newMovement)
-    })
-
-    if (response.ok) {
-        alert("Movement created successfully")
-        showMovements();
-    } else {
-        console.error("Error creating movement")
-    }
-}
-
-//edit movement - cargar datos en el formulario
+//edit movement - load data for movements
 async function editMovement(id) {
     let movement = await getMovement(id);
-    
-    // Llenar el formulario con los datos del movimiento
+
+    // changes dta for form movements
     $formMovements.type.value = movement.type;
     $formMovements.description.value = movement.description;
     $formMovements.amount.value = movement.amount;
     $formMovements.date.value = movement.date;
     $formMovements.category.value = movement.categoryId;
-    
-    // Cambiar el estado a edición
+
+    // Change status to editing
     editingMovementId = id;
     document.querySelector('button[type="submit"]').textContent = "Update Movement";
 }
 
-//update movement
-async function updateMovement(id, updatedMovement) {
-    let response = await fetch(`${endPointMovements}/${id}`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(updatedMovement)
-    })
 
-    if (response.ok) {
-        alert("Movement updated successfully")
-        showMovements();
-    } else {
-        console.error("Error updating movement")
-    }
-}
-
-//delete movement
-async function deleteMovement(id) {
-    if (confirm("Are you sure you want to delete this movement?")) {
-        let response = await fetch(`${endPointMovements}/${id}`, {
-            method: "DELETE"
-        })
-
-        if (response.ok) {
-            alert("Movement deleted successfully")
-            showMovements();
-        } else {
-            console.error("Error deleting movement")
-        }
-    }
-}
