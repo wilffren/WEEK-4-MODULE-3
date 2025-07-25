@@ -30,14 +30,6 @@
   ],
   "movements": [
     {
-      "id": "4832",
-      "type": "sale",
-      "description": "Sell my iphone",
-      "amount": "500000",
-      "date": "2025-07-24",
-      "categoryId": "1d34"
-    },
-    {
       "id": "b32e",
       "type": "buy",
       "description": "Market for month",
