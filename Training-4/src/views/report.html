@@ -1,29 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../css/categories.css">
-        <script type="module" src="../js/guardian.js"></script>
-        <title>DashBoard</title>
-    </head>
-    <body>
-        <header>
-            <h1>Welcome to the Store</h1>
-            <h2>Panel Control</h2>
-            <nav>
 
-                <button type="submit" id="return">Return Dashborad</button>
-            </nav>
-        </header>
-        <main>
-           
-            
-            
-        <footer>
-            <p>&copy; 2025 <em>Wilffren Muñoz</em></p>
-            <p>All rights reserved.</p>
-        </footer>
-        <script type="module" src="../js/categories.js"></script>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/categories.css">
+    <script type="module" src="../js/guardian.js"></script>
+    <title>DashBoard</title>
+</head>
+
+<body>
+    <header>
+        <h1>Welcome to the Store</h1>
+        <h2>Panel Control</h2>
+        <nav>
+
+            <button type="submit" id="return">Return Dashborad</button>
+        </nav>
+    </header>
+    <main>
+
+        <main class="reports-container">
+            <!-- General Summary -->
+            <section class="summary">
+                <h2>General Summary</h2>
+                <div class="summary-grid">
+                    <div class="report-box">
+                        <h3>🔝 Top-Selling Category</h3>
+                        <p id="top-selling-category">-</p>
+                    </div>
+                    <div class="report-box">
+                        <h3>🔽 Most Purchased Category</h3>
+                        <p id="most-purchased-category">-</p>
+                    </div>
+                    <div class="report-box">
+                        <h3>📦 Best-Selling Product</h3>
+                        <p id="best-selling-product">-</p>
+                    </div>
+                    <div class="report-box">
+                        <h3>🛒 Most Purchased Product</h3>
+                        <p id="most-purchased-product">-</p>
+                    </div>
+                    <div class="report-box">
+                        <h3>📈 Month with Most Sales</h3>
+                        <p id="month-most-sales">-</p>
+                    </div>
+                    <div class="report-box">
+                        <h3>📉 Month with Most Purchases</h3>
+                        <p id="month-most-purchases">-</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Grouped Totals -->
+            <section class="totals">
+                <h2>Totals by Category</h2>
+                <div id="category-totals" class="table-container">
+                    <!-- Dynamic table from JS -->
+                </div>
+
+                <h2>Totals by Month</h2>
+                <div id="month-totals" class="table-container">
+                    <!-- Dynamic table from JS -->
+                </div>
+            </section>
+        </main>
+
+
+    </main>
+    <footer>
+        <p>&copy; 2025 <em>Wilffren Muñoz</em></p>
+        <p>All rights reserved.</p>
+    </footer>
+    <script type="module" src="../js/categories.js"></script>
+</body>
+
 </html>
