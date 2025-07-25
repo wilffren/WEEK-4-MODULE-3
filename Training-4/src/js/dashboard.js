@@ -19,3 +19,10 @@ const $btnMovements = document.getElementById('btn-movements');
 $btnMovements.addEventListener('click', () => {
     window.location.href = "movements.html";
 })
+
+//button for go reports
+
+const $btnReports = document.getElementById("btn-reports");
+$btnReports.addEventListener("click", () => {
+    window.location.href = "report.html";
+})
