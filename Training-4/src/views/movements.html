@@ -1,1 +1,92 @@
-<h1>Hello world</h1>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../css/movements.css">
+        <script type="module" src="../js/guardian.js"></script>
+        <title>DashBoard</title>
+    </head>
+    <body>
+        <header>
+            <h1>Welcome to the Store</h1>
+            <h2>Panel Control</h2>
+            <nav>
+                <button type="submit" id="return">Return Dashborad</button>
+            </nav>
+        </header>
+        <main>
+            <section>
+                <form id="form-movements">
+                    <label for="type">Types</label>
+                    <select name="type" id="type">
+                        <option value>Select Option</option>
+                        <option value="buy">Buy</option>
+                        <option value="sale">Sale</option>
+                    </select>
+
+                    <label for="description">Description</label>
+                    <input type="text" id="description" name="description"
+                        required />
+
+                    <label for="amount">Amount ($)</label>
+                    <input type="number" id="amount" name="amount" min="1"
+                        required />
+
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date" required />
+
+                    <label for="category">Category</label>
+                    <select id="category" name="category" required>
+                        <option value="">-- Select category --</option>
+
+                    </select>
+
+                    <button type="submit" class="btn-save">Save
+                        Movement</button>
+                </form>
+            </section>
+
+            <section class="filters">
+                <select id="filter-type">
+                    <option value>Type</option>
+                    <option value="buy">Buy</option>
+                    <option value="sale">Sale</option>
+                </select>
+                <select id="filter-category">
+                    <option value>Category</option>
+                </select>
+
+                <input type="date" id="filter-start-date" />
+                <input type="date" id="filter-end-date" />
+
+                <button id="btn-clean-filter">Clean</button>
+            </section>
+
+            <section class="table-of-content">
+                <h2>Movements</h2>
+                <table id="movements-table">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                            <th>Category</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="movements-body">
+
+                    </tbody>
+                </table>
+
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2025 <em>Wilffren Muñoz</em></p>
+            <p>All rights reserved.</p>
+        </footer>
+        <script type="module" src="../js/movements.js"></script>
+    </body>
+</html>

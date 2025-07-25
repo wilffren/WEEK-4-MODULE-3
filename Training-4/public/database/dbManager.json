@@ -20,16 +20,26 @@
       "name": "Motors"
     },
     {
-      "name": "PC",
-      "id": "253b"
+      "id": "253b",
+      "name": "PC"
     },
     {
       "id": "cb21",
       "name": "Books"
     },
     {
-      "id": "8757",
-      "name": "Flys"
+      "id": "1d34",
+      "name": "Phones"
+    }
+  ],
+  "movements": [
+    {
+      "type": "buy",
+      "description": "my iphone 16 pro max",
+      "amount": "9000000",
+      "date": "2025-07-23",
+      "categoryId": "1d34",
+      "id": "c0ff"
     }
   ]
 }

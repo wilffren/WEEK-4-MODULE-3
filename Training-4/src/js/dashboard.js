@@ -13,3 +13,9 @@ const $btnCategories = document.getElementById('btn-categories');
 $btnCategories.addEventListener('click', () => {
     window.location.href = "categories.html";
 })
+
+//button for go movements
+const $btnMovements = document.getElementById('btn-movements');
+$btnMovements.addEventListener('click', () => {
+    window.location.href = "movements.html";
+})
