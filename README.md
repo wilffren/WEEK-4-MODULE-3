@@ -1,4 +1,3 @@
-# WEEK-4-MODULE-3
 # **Store Management System**
 
 This web application, developed with HTML, CSS, and JavaScript, provides a comprehensive store management solution with user authentication, category management, financial movements tracking, and detailed reporting. It offers an intuitive interface that allows users to efficiently manage their business operations and analyze performance through interactive dashboards and reports.
