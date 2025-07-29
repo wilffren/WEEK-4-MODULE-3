@@ -14,21 +14,9 @@
     {
       "id": "8688",
       "name": "Likes"
-    },
-    {
-      "id": "c92c",
-      "name": "Mandatory"
     }
   ],
   "movements": [
-    {
-      "id": "3c4c",
-      "type": "buy",
-      "description": "Market of food",
-      "amount": "150000",
-      "date": "2025-07-24",
-      "categoryId": "c92c"
-    },
     {
       "id": "3d27",
       "type": "buy",

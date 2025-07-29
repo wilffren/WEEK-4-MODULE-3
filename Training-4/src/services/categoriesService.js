@@ -2,6 +2,8 @@ import { loadCategories } from "../js/categories";
 
 // categories endpoint 
 const endPoint = "http://localhost:3000/categories";
+// movements endpoint for cascade operations
+const movementsEndpoint = "http://localhost:3000/movements";
 
 // saved categories function
 export async function saveCategorie(newCategory) {
@@ -16,8 +18,6 @@ export async function saveCategorie(newCategory) {
 
         if(response.ok){
             alert("Category created successfully!");
-            inputText.value = ""; 
-           
         } else {
             alert("Error creating category");
         }
@@ -40,7 +40,6 @@ export async function updateCategory(categoryId, newName) {
 
         if(response.ok){
             alert("Category updated successfully!");
-            loadCategories(); // Reload the list
         } else {
             alert("Error updating category");
         }
@@ -50,25 +49,60 @@ export async function updateCategory(categoryId, newName) {
     }
 }
 
-// Delete category function
-export async function deleteCategory(categoryId, categoryName) {
-    const confirmDelete = confirm(`Are you sure you want to delete "${categoryName}"?`);
-    
-    if (!confirmDelete) return;
-
+// Helper function to delete all operations by category ID
+async function deleteOperationsByCategory(categoryId) {
     try {
+        // Get all movements for this category
+        const operationsResponse = await fetch(`${movementsEndpoint}?categoryId=${categoryId}`);
+        const operations = await operationsResponse.json();
+        
+        // Delete each operation
+        const deletePromises = operations.map(operation => 
+            fetch(`${movementsEndpoint}/${operation.id}`, {
+                method: 'DELETE'
+            })
+        );
+        
+        // Wait for all deletions to complete
+        await Promise.all(deletePromises);
+        
+        return operations.length; // Return number of deleted operations
+    } catch (error) {
+        console.error('Error deleting operations by category:', error);
+        throw new Error('Failed to delete associated operations');
+    }
+}
+
+// Delete category function with cascade delete (eliminates operations automatically)
+export async function deleteCategory(categoryId, categoryName) {
+    try {
+        // STEP 1: Delete all operations associated with this category
+        const deletedOperationsCount = await deleteOperationsByCategory(categoryId);
+        
+        // STEP 2: Delete the category itself
         let response = await fetch(`${endPoint}/${categoryId}`, {
             method: "DELETE"
         });
 
         if(response.ok){
-            alert("Category deleted successfully!");
-            loadCategories(); // Reload the list
+            let successMessage = `Category "${categoryName}" deleted successfully!`;
+            if (deletedOperationsCount > 0) {
+                successMessage += `\n${deletedOperationsCount} associated operation(s) were also deleted.`;
+            }
+            alert(successMessage);
+            return true; // Indicate success
         } else {
-            alert("Error deleting category");
+            throw new Error('Failed to delete category from server');
         }
     } catch (error) {
         console.error('Error deleting category:', error);
-        alert("Error deleting category");
+        
+        // More specific error messages
+        if (error.message.includes('operations')) {
+            alert("Error deleting associated operations. Category deletion cancelled.");
+        } else {
+            alert("Error deleting category. Please try again.");
+        }
+        return false; // Indicate failure
     }
 }

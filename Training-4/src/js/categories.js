@@ -7,6 +7,8 @@ document.getElementById("return").addEventListener("click", () => {
 
 // categories endpoint 
 const endPoint = "http://localhost:3000/categories";
+// movements endpoint for cascade delete
+const movementsEndpoint = "http://localhost:3000/movements";
 
 //button for save categories
 const btnCategorie = document.getElementById("btn-categorie");
@@ -125,12 +127,40 @@ async function editCategory(categoryId, currentName) {
     loadCategories(); // Reload categories to show the updated one
 }
 
-// Function to confirm and delete category
+// Function to confirm and delete category with cascade delete warning
 async function confirmDeleteCategory(categoryId, categoryName) {
-    const confirmDelete = confirm(`Are you sure you want to delete the category "${categoryName}"?`);
-    
-    if (confirmDelete) {
-        await deleteCategory(categoryId, categoryName);
-        loadCategories(); // Reload categories to remove the deleted one
+    try {
+        // Check how many operations will be deleted
+        const operationsResponse = await fetch(`${movementsEndpoint}?categoryId=${categoryId}`);
+        const operationsToDelete = await operationsResponse.json();
+        
+        let confirmMessage = `Are you sure you want to delete the category "${categoryName}"?`;
+        
+        if (operationsToDelete.length > 0) {
+            confirmMessage += `\n\n⚠️ WARNING: This will also permanently delete ${operationsToDelete.length} operation(s) associated with this category.`;
+            confirmMessage += `\n\nThis action cannot be undone.`;
+        }
+        
+        const confirmDelete = confirm(confirmMessage);
+        
+        if (confirmDelete) {
+            const success = await deleteCategory(categoryId, categoryName);
+            if (success) {
+                loadCategories(); // Reload categories
+                
+                // Try to update movements list if the function exists (if user is on movements page)
+                if (typeof window.showMovements === 'function') {
+                    window.showMovements();
+                }
+                
+                // Alternative: trigger a custom event to notify other pages
+                window.dispatchEvent(new CustomEvent('categoryDeleted', { 
+                    detail: { categoryId, categoryName, deletedOperations: operationsToDelete.length } 
+                }));
+            }
+        }
+    } catch (error) {
+        console.error('Error in confirmDeleteCategory:', error);
+        alert('Error checking operations for this category. Please try again.');
     }
 }
