@@ -15,7 +15,7 @@ const inputText = document.getElementById("categorie");
 //list of categories
 const listCategories = document.getElementById("listCategories");
 
-btnCategorie.addEventListener("click", (event) => {
+btnCategorie.addEventListener("click", async (event) => {
     event.preventDefault(); // Prevent form submission
 
     const categoryName = inputText.value.trim();
@@ -27,9 +27,12 @@ btnCategorie.addEventListener("click", (event) => {
     const newCategory = {
         name: categoryName
     }
-    saveCategorie(newCategory);
+    
+    // Save category and reload list automatically
+    await saveCategorie(newCategory);
+    inputText.value = ""; // Clear input after saving
+    loadCategories(); // Reload categories to show the new one
 });
-
 
 //load the categories when the page loads
 export async function loadCategories() {
@@ -78,7 +81,7 @@ export async function loadCategories() {
             const deleteButton = document.createElement("button");
             deleteButton.textContent = "Delete";
             deleteButton.className = "delete-btn";
-            deleteButton.onclick = () => deleteCategory(categoryId, category.name);
+            deleteButton.onclick = () => confirmDeleteCategory(categoryId, category.name);
             
             // Append elements
             buttonsContainer.appendChild(editButton);
@@ -96,18 +99,13 @@ export async function loadCategories() {
     }
 }
 
-//get categories button
-const getCategory = document.getElementById("get-category");
-getCategory.addEventListener("click", loadCategories);
-
-//load categories
+//load categories automatically when page loads
 document.addEventListener("DOMContentLoaded", () => {
     loadCategories(); // load categories when the page is ready
 });
 
-
 // Function to edit category (prompts for new name)
-function editCategory(categoryId, currentName) {
+async function editCategory(categoryId, currentName) {
     const newName = prompt(`Edit category name:`, currentName);
     
     if (newName === null) return; // User cancelled
@@ -122,5 +120,17 @@ function editCategory(categoryId, currentName) {
         return;
     }
     
-    updateCategory(categoryId, newName.trim());
+    // Update category and reload list automatically
+    await updateCategory(categoryId, newName.trim());
+    loadCategories(); // Reload categories to show the updated one
+}
+
+// Function to confirm and delete category
+async function confirmDeleteCategory(categoryId, categoryName) {
+    const confirmDelete = confirm(`Are you sure you want to delete the category "${categoryName}"?`);
+    
+    if (confirmDelete) {
+        await deleteCategory(categoryId, categoryName);
+        loadCategories(); // Reload categories to remove the deleted one
+    }
 }

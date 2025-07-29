@@ -21,6 +21,9 @@ const $filterStartDate = document.getElementById("filter-start-date");
 const $filterEndDate = document.getElementById("filter-end-date");
 const $btnCleanFilter = document.getElementById("btn-clean-filter");
 
+// NEW: DOM element for sorting
+const $sortMovements = document.getElementById("sort-movements");
+
 let selectCategories = $formMovements.category
 let editingMovementId = null; // Variable to know if we are editing
 let allMovements = []; // Variable to store all movements without filters
@@ -31,18 +34,33 @@ document.addEventListener("DOMContentLoaded", function () {
     setupFilterEventListeners();
 })
 
-// Setup event listeners for all filters
+// Setup event listeners for all filters and sorting
 function setupFilterEventListeners() {
-    $filterType.addEventListener("change", applyFilters);
-    $filterCategory.addEventListener("change", applyFilters);
-    $filterStartDate.addEventListener("change", applyFilters);
-    $filterEndDate.addEventListener("change", applyFilters);
+    $filterType.addEventListener("change", applyFiltersAndSort);
+    $filterCategory.addEventListener("change", applyFiltersAndSort);
+    $filterStartDate.addEventListener("change", applyFiltersAndSort);
+    $filterEndDate.addEventListener("change", applyFiltersAndSort);
+    $sortMovements.addEventListener("change", applyFiltersAndSort); // NEW: Sort listener
     $btnCleanFilter.addEventListener("click", cleanFilters);
 }
 
-// Apply all active filters to movements
-function applyFilters() {
+// NEW: Apply both filters and sorting to movements
+function applyFiltersAndSort() {
     let filteredMovements = [...allMovements];
+
+    // Apply filters first
+    filteredMovements = applyFilters(filteredMovements);
+    
+    // Then apply sorting
+    filteredMovements = applySorting(filteredMovements);
+
+    // Render final result
+    renderMovements(filteredMovements);
+}
+
+// Apply all active filters to movements (refactored to return filtered array)
+function applyFilters(movements = allMovements) {
+    let filteredMovements = [...movements];
 
     // Filter by type
     if ($filterType.value) {
@@ -72,18 +90,50 @@ function applyFilters() {
         );
     }
 
-    // Render filtered movements
-    renderMovements(filteredMovements);
+    return filteredMovements;
 }
 
-// Clean all filters and show all movements
+// NEW: Apply sorting to movements
+function applySorting(movements) {
+    const sortValue = $sortMovements.value;
+    
+    if (!sortValue) return movements;
+
+    const sortedMovements = [...movements];
+
+    switch (sortValue) {
+        case 'date-desc': // Most Recent
+            return sortedMovements.sort((a, b) => new Date(b.date) - new Date(a.date));
+        
+        case 'date-asc': // Least Recent
+            return sortedMovements.sort((a, b) => new Date(a.date) - new Date(b.date));
+        
+        case 'amount-desc': // Highest Amount
+            return sortedMovements.sort((a, b) => parseFloat(b.amount) - parseFloat(a.amount));
+        
+        case 'amount-asc': // Lowest Amount
+            return sortedMovements.sort((a, b) => parseFloat(a.amount) - parseFloat(b.amount));
+        
+        case 'description-asc': // A-Z
+            return sortedMovements.sort((a, b) => a.description.toLowerCase().localeCompare(b.description.toLowerCase()));
+        
+        case 'description-desc': // Z-A
+            return sortedMovements.sort((a, b) => b.description.toLowerCase().localeCompare(a.description.toLowerCase()));
+        
+        default:
+            return sortedMovements;
+    }
+}
+
+// Clean all filters and sorting, show all movements
 function cleanFilters() {
     $filterType.value = "";
     $filterCategory.value = "";
     $filterStartDate.value = "";
     $filterEndDate.value = "";
+    $sortMovements.value = ""; // NEW: Reset sorting
     
-    // Show all movements
+    // Show all movements without any filters or sorting
     renderMovements(allMovements);
 }
 
@@ -174,7 +224,9 @@ async function showCategories() {
 export async function showMovements() {
     let movements = await getMovements()
     allMovements = movements; // Store all movements for filtering
-    renderMovements(movements);
+    
+    // Apply current filters and sorting when loading movements
+    applyFiltersAndSort();
 }
 
 // Render movements in table (separated function for reuse with filters)
